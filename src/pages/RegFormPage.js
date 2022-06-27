@@ -1,6 +1,6 @@
 import AuthForm, { STATE_LOGIN } from 'components/AuthForm';
 import AuthUser from 'components/AuthUser';
-import React, { useState,createContext } from 'react';
+import React, { useState,createContext, useEffect } from 'react';
 import {
   Media,
   Card,
@@ -33,7 +33,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import arrowImage from 'assets/img/logo/arrowupanddown.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { otpdatas } from '../redux/action/action';
+import { otpdatas } from '../redux/action/Actions';
 
 const LoginFormPage = () => {
   const Name = createContext();
@@ -48,7 +48,7 @@ const LoginFormPage = () => {
   const {http,setToken,setData} = AuthUser();
   const dispatch = useDispatch();
 
-  dispatch(otpdatas(dataa))
+  
   
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -89,10 +89,16 @@ const LoginFormPage = () => {
     
     
     {setdata(res.data)})
-
-  
+    
+    
 
   }
+  useEffect(() => {
+    if(dataa.length !==0)
+    dispatch(otpdatas(dataa))
+ 
+}, [dataa])
+ 
 
     const onChangeuserId = event => {
       setuserId(event.target.value);
@@ -411,9 +417,9 @@ const LoginFormPage = () => {
                   }}
                   onClick={registrationFormHandle}
                 >
-                  {/* <Link to="/otpregform"> */}
+                  <Link to="/otpregform">
                     Get OTP
-                    {/* </Link> */}
+                    </Link>
                   
                 </Button>
               </FormGroup>
