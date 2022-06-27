@@ -13,6 +13,7 @@ import OtpRegFormPage from './pages/OtpRegFormPage';
 import CongratFormPage from './pages/CongratFormPage';
 import AuthUser from 'components/AuthUser';
 import './styles/reduction.scss';
+import Otpregfun from './pages/Otpregfun';
 
 
 const ActivityFirstPage = React.lazy(() => import('pages/ActivityFirstPage'));
@@ -86,7 +87,8 @@ function App() {
               path="/otpregform"
               layout={EmptyLayout}
               component={props => (
-                <OtpRegFormPage {...props}  />
+                // <OtpRegFormPage {...props}  />
+                <Otpregfun {...props}  />
               )}
             />
             <LayoutRoute

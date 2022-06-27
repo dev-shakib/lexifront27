@@ -33,7 +33,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import arrowImage from 'assets/img/logo/arrowupanddown.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { otpdata_reducers } from '../redux/reducer/otpreducer';
+import { otpdatas } from '../redux/action/action';
 
 const LoginFormPage = () => {
   const Name = createContext();
@@ -47,6 +47,8 @@ const LoginFormPage = () => {
   const [email,setemail] = useState();
   const {http,setToken,setData} = AuthUser();
   const dispatch = useDispatch();
+
+  dispatch(otpdatas(dataa))
   
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
