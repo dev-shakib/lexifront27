@@ -33,62 +33,38 @@ import arrowImage from 'assets/img/logo/arrowupanddown.png';
 import { useSelector } from 'react-redux';
 import AuthUser from '../components/AuthUser';
 import axios from 'axios'
+import {useNavigate} from 'react'
+import React from 'react'
 
+const OtpRegFormPage  = () => {
 
-class LoginFormPage extends React.Component {
+  const [modal, setmodal] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [checkedA, setCheckedA] = useState(true)
+  const [checkedB, setCheckedB] = useState(false)
 
-  state = {
-    modal: false,
-    showPassword: false,
-    checkedA: true,
-    checkedB: false,
-    data:'hello'
+  // const handleChange = name => event => {
+  //   this.setState({ ...this.state, [name]: event.target.checked });
+  // };
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
   };
-  DummyView = () => {
-    // this.e.preventDefault();
-    // const {http,setToken,setData} = AuthUser();
-
-    const reducer = useSelector(state => state.alldata.otp_data)
-    
-    // http.post('/login',{email:email,password:password,userid:userId}).then((res)=>{
-    //   setToken(res.data.user,res.data.access_token);
-    // })
-
-    
-  
-    console.log('this is reducer',reducer)
-    this.setState({ data: reducer });
-    return null
-}
-
-Postonclick =()=>{
-  axios.post('/api/teacher/verify-otp',this.state.data).then((res)=>
-    
-    
-    {console.log(res.data)})
-
-}
-
-  handleChange = name => event => {
-    this.setState({ ...this.state, [name]: event.target.checked });
-  };
-  handleClickShowPassword = () => {
-    this.setState({ showPassword: !this.state.showPassword });
-  };
-  handleMouseDownPassword = event => {
+  const handleMouseDownPassword = event => {
     event.preventDefault();
   };
-  toggle = modalType => () => {
+
+
+  const toggle = modalType => () => {
     if (!modalType) {
-      return this.setState({
-        modal: !this.state.modal,
-      });
+      return setmodal(!modal,
+    );
     }
-    this.setState({
-      [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
+    setmodal({
+      [`modal_${modalType}`]: ![`modal_${modalType}`],
     });
   };
-  handleAuthState = authState => {
+
+  const handleAuthState = authState => {
     if (authState === STATE_LOGIN) {
       this.props.history.push('/login');
     } else {
@@ -96,11 +72,18 @@ Postonclick =()=>{
     }
   };
 
-  handleLogoClick = () => {
-    this.props.history.push('/');
+ const handleAuthState = authState => {
+    if (authState === STATE_LOGIN) {
+      this.props.history.push('/login');
+    } else {
+      this.props.history.push('/signup');
+    }
   };
 
-  render() {
+  const handleLogoClick = () => {
+    this.props.history.push('/');
+  };
+ 
     const loginbutton = {
       background: 'rgba(255, 255, 255, 0.05)',
       border: '1.5px solid rgba(255, 255, 255, 0.2)',
@@ -352,7 +335,61 @@ Postonclick =()=>{
         </Row>
       </React.Fragment>
     );
-  }
+
 }
 
-export default LoginFormPage;
+export default OtpRegFormPage 
+
+
+// class LoginFormPage extends React.Component {
+
+  // state = {
+  //   modal: false,
+  //   showPassword: false,
+  //   checkedA: true,
+  //   checkedB: false,
+  //   data:'hello'
+  // };
+  // DummyView = () => {
+    // this.e.preventDefault();
+    // const {http,setToken,setData} = AuthUser();
+
+    // const reducer = useSelector(state => state.alldata.otp_data)
+    
+    // http.post('/login',{email:email,password:password,userid:userId}).then((res)=>{
+    //   setToken(res.data.user,res.data.access_token);
+    // })
+
+    
+  
+    // console.log('this is reducer',reducer)
+    // this.setState({ data: reducer });
+    // return null
+// }
+
+// Postonclick =()=>{
+  // axios.post('/api/teacher/verify-otp',this.state.data).then((res)=>
+    
+    
+    // {
+      // console.log(res.data)
+    // })
+
+// }
+
+
+  // toggle = modalType => () => {
+  //   if (!modalType) {
+  //     return this.setState({
+  //       modal: !this.state.modal,
+  //     });
+  //   }
+  //   this.setState({
+  //     [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
+  //   });
+  // };
+  
+
+  
+// }
+

@@ -31,7 +31,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import arrowImage from 'assets/img/logo/arrowupanddown.png';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { otpdatas } from '../redux/action/Actions';
 
@@ -47,6 +47,9 @@ const LoginFormPage = () => {
   const [email,setemail] = useState();
   const {http,setToken,setData} = AuthUser();
   const dispatch = useDispatch();
+  // const history = useHistory();
+
+  // const navigate = useNavigate();
 
   
   
@@ -88,16 +91,18 @@ const LoginFormPage = () => {
     http.post('/teacher/register',{email:email,password:password,user_id:userId}).then((res)=>
     
     
-    {setdata(res.data)})
+    {dispatch(otpdatas(res.data))})
+   
+   
     
     
 
   }
-  useEffect(() => {
-    if(dataa.length !==0)
-    dispatch(otpdatas(dataa))
+//   useEffect(() => {
+//     if(dataa.length !==0)
+//     dispatch(otpdatas(dataa))
  
-}, [dataa])
+// }, [dataa])
  
 
     const onChangeuserId = event => {
@@ -417,9 +422,10 @@ const LoginFormPage = () => {
                   }}
                   onClick={registrationFormHandle}
                 >
-                  <Link to="/otpregform">
-                    Get OTP
-                    </Link>
+                  <Link to='/otpregform'>Get OTP</Link>
+                  
+                    
+           
                   
                 </Button>
               </FormGroup>
